@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>ABS Party People</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+	integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+	crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" media="screen"
+	href="/css/main.css" />
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+	integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+	crossorigin="anonymous"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+	integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+	crossorigin="anonymous"></script>
+<script src="/js/main.js"></script>
+</head>
+
+<body>
+	<nav class="navbar sticky-top navbar-light bg-light">
+		<a class="navbar-brand" href="#"> <img src="/img/abslogo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+			ABS Party People
+		</a>
+		<div class="navbar-brand">
+		Welcome, <b><label th:text="${user.firstName}+' '+${user.lastName}"></label></b>
+		<button class="btn btn-outline-primary" data-toggle="modal" data-target="#newPostDialog">
+			<i class="fa fa-pen"></i> New post
+		</button>
+		<label id="allUsersButton"></label>
+		<script th:inline="javascript">
+			/*<![CDATA[*/
+			    var admin = /*[[${admin}]]*/ 'default';
+			    if (admin === "1") {
+			    	document.getElementById("allUsersButton").innerHTML = "<a href=\"/user/all\"><button class=\"btn btn-outline-primary\"><i class=\"fa fa-users\"></i> Users</button></a>";
+			    }
+			/*]]>*/
+		</script>
+		<a href="/login?logout">
+			<button class="btn btn-outline-secondary">
+				<i class="fa fa-times-circle"></i> Logout
+			</button>
+		</a>
+		</div>
+	</nav>
+
+	<div class="posts" th:each="post: ${postList}">
+		<div class="card">
+			<div class="card-header">
+				<img th:src="'/user/displayPhoto?id='+${post.user.id}" class="rounded profilePicture">
+				<div class="postInfo">
+					<h5 class="card-title" th:text="${post.user.firstName}+' '+${post.user.lastName}"></h5>
+					<h6 class="card-subtitle mb-2 text-muted">
+						<i class="fa fa-clock"></i> <i th:text="${post.createdAt}"></i>
+					</h6>
+					<h6 class="card-subtitle mb-2 text-muted" th:text="${post.location}">
+						<i class="fa fa-map-marker-alt"></i>
+					</h6>
+				</div>
+			</div>
+			<div class="card-body" th:each="attachment: ${post.attachmentList}">
+				<img th:src="'displayAttachment?id='+${attachment.id}" class="postPicture">
+				<p class="card-text" th:text="${post.content}"></p>
+				<a href="#" class="card-link"><i class="fa fa-heart"></i> Like</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal fade" id="newPostDialog" tabindex="-1" role="dialog" aria-labelledby="newPostDialogLabel" aria-hidden="true">
+		<form th:action="@{/post/add}" th:object="${post}" method="post" enctype="multipart/form-data">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="newPostDialogLabel">New post</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<label for="content" class="col-form-label">Say something:</label>
+							<textarea class="form-control" id="content" th:field="*{content}"></textarea>
+						</div>
+						<div class="form-group">
+							<label for="location" class="col-form-label">Location:</label>
+							<input class="form-control" id="location" th:field="*{location}"></input>
+						</div>
+						<div class="form-group">
+							<label for="attachment" class="col-form-label">Select an image:</label>
+							<input type="file" class="form-control-file" id="attachment" name="attachment"/>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+						<button type="submit" class="btn btn-primary">Post now</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+
+</body>
+
+</html>

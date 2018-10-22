@@ -1,0 +1,27 @@
+.posts {
+    padding-top: 100px;
+    padding-left: 100px;
+}
+
+.card {
+    width: 600px;
+    margin-bottom: 50px;
+}
+
+.profilePicture {
+    width: 80px;
+    border-radius: 50px !important;
+}
+
+.postInfo {
+    display: inline-block;
+    vertical-align: bottom;
+    margin-left: 10px;
+}
+
+.postPicture {
+    max-width: 598px;
+    margin-top: -20px;
+    margin-left: -20px;
+    margin-bottom: 20px;
+}
