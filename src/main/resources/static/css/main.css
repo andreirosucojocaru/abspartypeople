@@ -1,27 +1,64 @@
-.posts {
-    padding-top: 100px;
-    padding-left: 100px;
+.navbar {
+	margin-bottom: 100px;
+}
+
+.navbar-right-container button, .navbar-right-container a {
+	margin-left: 8px;
+}
+
+.posts, .welcomeAndNewPost {
+	padding-left: 100px;
 }
 
 .card {
-    width: 600px;
-    margin-bottom: 50px;
+	width: 600px;
+	margin-bottom: 50px;
 }
 
 .profilePicture {
-    width: 80px;
-    border-radius: 50px !important;
+	width: 70px;
+	border-radius: 50px !important;
 }
 
-.postInfo {
-    display: inline-block;
-    vertical-align: bottom;
-    margin-left: 10px;
+.welcomeProfilePicture {
+	width: 40px;
+	border-radius: 50px !important;
+}
+
+.postInfo, .welcomeText {
+	display: inline-block;
+	vertical-align: bottom;
+	margin-left: 10px;
 }
 
 .postPicture {
-    max-width: 598px;
-    margin-top: -20px;
-    margin-left: -20px;
-    margin-bottom: 20px;
+	max-width: 598px;
+	margin-top: -20px;
+	margin-left: -20px;
+	margin-bottom: 20px;
+}
+
+.row {
+	padding-left: 50px;
+}
+
+.postContentText {
+	font-size: 20px;
+}
+
+.fileUpload {
+	position: relative;
+	overflow: hidden;
+}
+
+.fileButton {
+	position: absolute;
+	font-size: 50px;
+	opacity: 0;
+	right: 0;
+	top: 0;
+}
+
+.postNowButton {
+	float: right;
 }

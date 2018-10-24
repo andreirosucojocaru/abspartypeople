@@ -74,10 +74,12 @@ public class PostController {
 		post.setUser(user);
 		post.setCreatedAt(Timestamp.valueOf(LocalDateTime.now()));
 		List<Attachment> attachmentList = new ArrayList<>();
-		Attachment attachment = new Attachment();
-		attachment.setContent(uploadingFile.getBytes());
-		attachment.setPost(post);
-		attachmentList.add(attachment);
+		if (uploadingFile.getBytes().length > 0) {
+			Attachment attachment = new Attachment();
+			attachment.setContent(uploadingFile.getBytes());
+			attachment.setPost(post);
+			attachmentList.add(attachment);
+		}
 		post.setAttachmentList(attachmentList);
 		List<Rating> ratingList = new ArrayList<>();
 		post.setRatingList(ratingList);

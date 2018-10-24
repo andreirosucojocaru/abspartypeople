@@ -1,5 +1,3 @@
-drop database abspartypeople;
-
 create database abspartypeople;
 
 use abspartypeople;

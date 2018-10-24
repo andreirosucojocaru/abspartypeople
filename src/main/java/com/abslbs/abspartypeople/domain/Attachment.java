@@ -15,19 +15,19 @@ import javax.persistence.ManyToOne;
 public class Attachment implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
 	@Lob
-	@Column(length = 100_000, nullable = false)
+	@Column(length = 999_999_999, nullable = false)
 	private byte[] content;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "post_id")
 	private Post post;
-	
+
 	public Attachment() {
 	}
 
